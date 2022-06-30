@@ -1,0 +1,22 @@
+﻿@page
+@model TodoAppEFCore.Pages.EditTodoModel
+@{
+}
+
+
+
+<div class="row d-flex justify-content-center mt-lg-5">
+    <h1>Edit Todo</h1>
+
+    <div class="col-md-8">
+        <div class="d-block text-right card-footer d-flex justify-content-between mb-5 border rounded">
+            <form method="post" asp-page-handler="AddTodo">
+                <input type="text" asp-for="Todo.Id" hidden/>
+                <input type="text" asp-for="Todo.Content" />
+                <input type="text" asp-for="Todo.CreatedDate" hidden/>
+
+                <input class="btn btn-outline-primary" type="submit" value="Edit Todo" />
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row d-flex justify-content-center mt-lg-5">
+
+    <div class="col-md-8">
+        <div class="d-block text-right card-footer d-flex justify-content-between mb-5 border rounded">
+            <form method="post" asp-page-handler="AddTodo">
+                <input type="text" asp-for="Todo.Content" required/>
+                <input class="btn btn-outline-primary" type="submit" value="Add Todo" />
+            </form>
+            <form>
+                <input type="text" asp-for="SearchTodo"n placeholder="search todo" />
+                <button class="btn btn-outline-primary" type="submit">Search Todo</button>
+            </form>
+
+        </div>
+
+        <div class="mb-3">
+            <form method="post" >
+                <button type="submit" asp-page-handler="DeleteSelected" class="btn btn-outline-danger">Delete Selected</button>
+            </form>
+        </div>
+        <div class="card-hover-shadow-2x mb-3 card">
+
+
+            <div class="card-header-tab card-header">
+                <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                    <i class="fa fa-tasks"></i>&nbsp;Task Lists
+                </div>
+
+            </div>
+            <div class="scroll-area-sm">
+                <perfect-scrollbar class="ps-show-limits">
+                    <div style="position: static;" class="ps ps--active-y">
+                        <div class="ps-content">
+                            <ul class=" list-group list-group-flush">
+                                @foreach (var todo in Model.Todos)
+                                {
+                                    <li class="list-group-item">
+                                        <div class="todo-indicator bg-warning"></div>
+                                        <div class="widget-content p-0">
+                                            <div class="widget-content-wrapper">
+                                                <div class="widget-content-left mr-2">
+                                                    <div class="custom-checkbox custom-control">
+                                                        <input class="form-check-input me-0" asp-for="@todo.Check">
+                                                    </div>
+                                                </div>
+
+                                                <div class="widget-content-left">
+                                                    <div class="widget-heading">
+                                                        @todo.Content
+                                                        <div class="badge badge-success ml-2">New</div>
+                                                    </div>
+                                                    <div class="widget-subheading"><i>Date Created: @todo.CreatedDate</i></div>
+                                                </div>
+                                                <div class="widget-content-right">
+                                                    <form method="post">
+                                                        <a asp-page="EditTodo" asp-page-handler="EditTodo" asp-route-id="@todo.Id" class="border-0 btn-transition btn btn-outline-success">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <button type="submit" asp-route-id="@todo.Id" asp-page-handler="DeleteTodo" class="border-0 btn-transition btn btn-outline-danger">
+                                                            <i class="fa fa-trash"></i>
+
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+
+                    </div>
+                </perfect-scrollbar>
+            </div>
+
+        </div>
+    </div>
+</div>
