@@ -45,7 +45,7 @@ namespace TodoAppEFCore.Repository
 
         public async Task<List<Todo>> SearchTodo(string word)
         {
-            var todo = await _context.Todos.Where(x => x.Content.Contains(word)).ToListAsync();
+            var todo = await _context.Todos.Where(x => x.Content.ToLower().Contains(word.ToLower())).ToListAsync();
             return todo;
         }
 
